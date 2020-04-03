@@ -19,7 +19,7 @@ ServeState = Class{__includes = BaseState}
 function ServeState:enter(params)
     -- grab game state from params
     self.paddle = params.paddle
-    self.bricks = params.bricks
+    self.bricks = params.levelMap
     self.health = params.health
     self.score = params.score
     self.highScores = params.highScores
@@ -41,7 +41,7 @@ function ServeState:update(dt)
         -- pass in all important state info to the PlayState
         gStateMachine:change('play', {
             paddle = self.paddle,
-            bricks = self.bricks,
+            levelMap = self.bricks.bricks,
             health = self.health,
             score = self.score,
             highScores = self.highScores,
@@ -60,7 +60,7 @@ function ServeState:render()
     self.paddle:render()
     self.ball:render()
 
-    for k, brick in pairs(self.bricks) do
+    for k, brick in pairs(self.bricks.bricks) do
         brick:render()
     end
 

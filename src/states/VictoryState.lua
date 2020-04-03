@@ -34,7 +34,7 @@ function VictoryState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('serve', {
             level = self.level + 1,
-            bricks = LevelMaker.createMap(self.level + 1),
+            levelMap = LevelMaker.createMap(self.level + 1),
             paddle = self.paddle,
             health = self.health,
             score = self.score,

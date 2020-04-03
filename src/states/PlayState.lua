@@ -22,7 +22,7 @@ PlayState = Class{__includes = BaseState}
 ]]
 function PlayState:enter(params)
     self.paddle = params.paddle
-    self.bricks = params.bricks
+    self.bricks = params.levelMap
     self.locked = params.locked
     self.health = params.health
     self.score = params.score
@@ -255,7 +255,7 @@ function PlayState:update(dt)
             self.paddle:shrink()
             gStateMachine:change('serve', {
                 paddle = self.paddle,
-                bricks = self.bricks,
+                levelMap = self.bricks,
                 locked = self.locked,
                 key = self.key,
                 health = self.health,
@@ -269,7 +269,7 @@ function PlayState:update(dt)
 
     -- for rendering particle systems
     for k, brick in pairs(self.bricks) do
-        brick:update(dt)
+        brick.bricks:update(dt)
     end
 
     if love.keyboard.wasPressed('escape') then
@@ -285,7 +285,7 @@ function PlayState:render()
     end
 
     -- render all particle systems
-    for k, brick in pairs(self.bricks) do
+    for k, brick in pairs(self.bricks.bricks) do
         brick:renderParticles()
     end
 
